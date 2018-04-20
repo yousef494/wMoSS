@@ -45,16 +45,14 @@ public class CRUD extends HttpServlet {
         try {
             String postType = request.getParameter("postType");
 
-            Search search = new Search();
+            //represent single user story/function e.g.search
             if (postType.contentEquals("search")) {
                 String query = request.getParameter("query");
-                System.out.println(query);
-
+                Search search = new Search();
                 //List<Object> records = search.search(query);
                 message.setResult("OK");
                 message.setMessage("We got your query: "+ query);
                 //message.setRecords(records);
-                message.setRecordsFilteredTotal(0);
                 message.setRecordsTotal(0);
             }
 

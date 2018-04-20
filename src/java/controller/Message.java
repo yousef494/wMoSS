@@ -8,19 +8,17 @@ package controller;
 import java.util.List;
 
 /**
- *
- * @author Yousef
+ * This class is responsible for holding object conversation between UI and the backend
  */
 public class Message {
     
-    private String result;
-    private String message;
-    private String view;
-    private String postType;
-    private Object record;
-    private List<Object> records;
-    private Integer recordsTotal;
-    private Integer recordsFilteredTotal;
+    private String result;//OK/ERROR
+    private String message;//e.g. ERROR message
+    private String view;//view type e.g. Movies, Cart
+    private String postType;//add/edit/delete/view/search/find/...
+    private Object record;//Single movie/session entry
+    private List<Object> records;//Multiple moives/sessions entries
+    private Integer recordsTotal;//Number of records/entries
 
     
     public Message() {
@@ -98,17 +96,10 @@ public class Message {
         this.recordsTotal = recordsTotal;
     }
 
-    public Integer getRecordsFilteredTotal() {
-        return recordsFilteredTotal;
-    }
-
-    public void setRecordsFilteredTotal(Integer recordsFilteredTotal) {
-        this.recordsFilteredTotal = recordsFilteredTotal;
-    }
 
     @Override
     public String toString() {
-        return "Communication{" + "result=" + result + ", message=" + message + ", view=" + view + ", postType=" + postType + ", record=" + record + ", records=" + records + ", recordsTotal=" + recordsTotal + ", recordsFilteredTotal=" + recordsFilteredTotal + '}';
+        return "Communication{" + "result=" + result + ", message=" + message + ", view=" + view + ", postType=" + postType + ", record=" + record + ", records=" + records + ", recordsTotal=" + recordsTotal + '}';
     }
 
     
