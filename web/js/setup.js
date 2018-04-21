@@ -1,4 +1,27 @@
 
+$(document).ready(function () {
+     /**
+      * Action listner for search btn
+      */
+    $('#searchBtn').click(function () {
+        var term = $('#searchValue').val();
+        var message = {"postType": 'search', "query": term};
+
+        callAjax("CRUD", message, false,
+                function (data) {
+                    if (data.result == 'OK') {
+                        mainpulatePage(data);
+                    } else if (data.result == 'ERROR') {
+
+                    }
+                },
+                function (error) {
+                    alert(error);
+                });
+    });
+
+
+});
 
 function callAjax(url, postData, async, success, error) {
 
@@ -80,26 +103,6 @@ jQuery(document).ready(function ($) {
 
 
 $(document).ready(function () {
-     /**
-      * Action listner for search btn
-      */
-    $('#searchBtn').click(function () {
-        var term = $('#searchValue').val();
-        var message = {"postType": 'search', "query": term};
-
-        callAjax("CRUD", message, false,
-                function (data) {
-                    if (data.result == 'OK') {
-                        mainpulatePage(data);
-                    } else if (data.result == 'ERROR') {
-
-                    }
-                },
-                function (error) {
-                    alert(error);
-                });
-    });
-
 
 
     $().UItoTop({easingType: 'easeOutQuart'});
@@ -139,13 +142,13 @@ function mainpulatePage(data) {
  * @returns {undefined}
  */
 function createCard(container, record){
-    var cardOuter = $('<div class="col-md-4 product-men"></div>').appendTo(container);
+    var cardOuter = $('<div class="col-md-3 product-men"></div>').appendTo(container);
     var shelf = $('<div class="men-pro-item simpleCart_shelfItem"></div>').appendTo(cardOuter);
     
     //inside shelf 1
     var item = $('<div class="men-thumb-item"></div>').appendTo(shelf);
-    $(item).append('<img src="images/movies/'+record.image+'" alt="" class="pro-image-front"/>');
-    $(item).append('<img src="images/movies/'+record.image+'" alt="" class="pro-image-back"/>');
+    $(item).append('<img src="images/movies/'+record.image+'" alt="" class="pro-image-front" />');
+    $(item).append('<img src="images/movies/'+record.image+'" alt="" class="pro-image-back" />');
     var cart = $('<div class="men-cart-pro"></div>').appendTo(item);
     var innerCart = $('<div class="inner-men-cart-pro"></div>').appendTo(cart);
     $(innerCart).append('<a href="single.jsp" class="link-product-add-cart">Quick View</a>');
@@ -156,7 +159,12 @@ function createCard(container, record){
     //inside shelf 3
     var product = $('<div class="item-info-product "></div>').appendTo(shelf);
     $(product).append('<h4><a href="single.jsp">'+record.name+'</a></h4>');
-    /*var details = $('<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"></div>').appendTo(product);
+    var sessions ='';
+    for(var i=0;i<record.sessions.length;i++){
+        sessions += '<span style="margin-left: 5px;">'+record.sessions[i]+'</span>,';
+    }
+    $(product).append(sessions.substring(0,sessions.length-2));
+    var details = $('<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"></div>').appendTo(product);
     var form = $(' <form action="#" method="post"></form>').appendTo(details);
     var fieldset = $(' <fieldset></fieldset>').appendTo(form);
     $(fieldset).append('<input type="hidden" name="cmd" value="_cart"/>');
@@ -168,7 +176,7 @@ function createCard(container, record){
     $(fieldset).append('<input type="hidden" name="currency_code" value="USD"/>');
     $(fieldset).append('<input type="hidden" name="return" value=" "/>');
     $(fieldset).append('<input type="hidden" name="cancel_return" value=" "/>');
-    $(fieldset).append('<input type="submit" name="submit" value="Add to cart" class="button"/>');*/
+    $(fieldset).append('<input type="submit" name="submit" value="Add to cart" class="button"/>');
 }
 
 //End of search functions

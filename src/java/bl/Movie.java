@@ -20,6 +20,7 @@ public class Movie {
     private String price;
     private List<String> sessions;
     private String image;
+    private String release;
 
     public String getName() {
         return name;
@@ -60,6 +61,24 @@ public class Movie {
     public void setSessions(List<String> sessions) {
         this.sessions = sessions;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getRelease() {
+        return release;
+    }
+
+    public void setRelease(String release) {
+        this.release = release;
+    }
+    
+    
 
     @Override
     public int hashCode() {

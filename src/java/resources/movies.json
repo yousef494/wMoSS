@@ -20,7 +20,7 @@
       "01:45pm",
       "04:00pm"
     ],
-    "price": "Price",
+    "price": "$15",
     "image": "peterrabit.jpg",
     "release": "03/02/2018",
     "status": "Current"
@@ -33,7 +33,7 @@
       "02:45pm",
       "05:00pm"
     ],
-    "price": "Price",
+    "price": "$15",
     "image": "avengers.jpg",
     "release": "25/04/2018",
     "status": "Coming Soon"
@@ -46,7 +46,7 @@
       "03:45pm",
       "06:00pm"
     ],
-    "price": "Price",
+    "price": "$15",
     "image": "blackpanther.jpg",
     "release": "29/01/2018",
     "status": "Current"
@@ -59,7 +59,7 @@
       "11:45pm",
       "02:30pm"
     ],
-    "price": "Price",
+    "price": "$15",
     "image": "aquietplace.jpg",
     "release": "03/04/2018",
     "status": "Current"
@@ -72,7 +72,7 @@
       "12:45pm",
       "03:00pm"
     ],
-    "price": "Price",
+    "price": "$15",
     "image": "readyplayerone.jpg",
     "release": "29/03/2018",
     "status": "Current"
@@ -85,7 +85,7 @@
       "12:30pm",
       "02:45pm"
     ],
-    "price": "Price",
+    "price": "$15",
     "image": "sherlockgnomes.jpg",
     "release": "29/03/2018",
     "status": "Current"
@@ -98,7 +98,7 @@
       "04:45pm",
       "06:30pm"
     ],
-    "price": "Price",
+    "price": "$15",
     "image": "truthordare.jpg",
     "release": "13/04/2018",
     "status": "Current"
@@ -111,7 +111,7 @@
       "04:00pm",
       "06:45pm"
     ],
-    "price": "Price",
+    "price": "$15",
     "image": "incredibles2.jpg",
     "release": "14/06/2018",
     "status": "Coming Soon"
@@ -124,7 +124,7 @@
       "02:00pm",
       "06:45pm"
     ],
-    "price": "Price",
+    "price": "$15",
     "image": "deadpool2.jpg",
     "release": "16/05/2018",
     "status": "Coming Soon"
@@ -137,7 +137,7 @@
       "02:00pm",
       "06:45pm"
     ],
-    "price": "Price",
+    "price": "$15",
     "image": "rampage.jpg",
     "release": "16/05/2018",
     "status": "Coming Soon"
