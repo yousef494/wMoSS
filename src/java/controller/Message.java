@@ -5,6 +5,7 @@
  */
 package controller;
 
+import bl.Movie;
 import java.util.List;
 
 /**
@@ -17,11 +18,14 @@ public class Message {
     private String view;//view type e.g. Movies, Cart
     private String postType;//add/edit/delete/view/search/find/...
     private Object record;//Single movie/session entry
-    private List<Object> records;//Multiple moives/sessions entries
+    private List<Movie> records;//Multiple moives/sessions entries
     private Integer recordsTotal;//Number of records/entries
 
     
     public Message() {
+        Integer i = 0;
+        Integer[] ar;
+        List<Integer> l;
     }
     
     public Message(String result) {
@@ -79,11 +83,11 @@ public class Message {
         this.record = record;
     }
 
-    public List<Object> getRecords() {
+    public List<Movie> getRecords() {
         return records;
     }
 
-    public void setRecords(List<Object> records) {
+    public void setRecords(List<Movie> records) {
         this.records = records;
         this.recordsTotal = records.size();
     }

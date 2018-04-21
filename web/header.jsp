@@ -54,8 +54,8 @@
 					<li class="menu__item dropdown">
 					   <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Movies<b class="caret"></b></a>
 								<ul class="dropdown-menu agile_short_dropdown">
-									<li><a href="mens.html">Now showing</a></li>
-									<li><a href="mens.html">Coming soon</a></li>
+									<li><a href="navigate.jsp?status=Current">Current</a></li>
+									<li><a href="navigate.jsp?status=Coming Soon">Coming Soon</a></li>
 								</ul>
 					</li>
 				  </ul>

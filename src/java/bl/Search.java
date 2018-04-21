@@ -33,7 +33,7 @@ public class Search {
      * @param name
      * @return 
      */
-    public Movie find(List<Movie> movies, String name) {
+    private Movie find(List<Movie> movies, String name) {
         for(int i=0; i<movies.size();i++){
             if(movies.get(i).getName().contains(name))
                 return movies.get(i);
@@ -52,6 +52,7 @@ public class Search {
         List<Movie> movies = fileAdapter.loadMovies();
         return search(movies, name);
     }
+    
    
    /**
     * Find multiple movies by name
@@ -59,11 +60,42 @@ public class Search {
     * @param name
     * @return 
     */ 
-    public List<Movie> search(List<Movie> movies, String name) {
+    private List<Movie> search(List<Movie> movies, String name) {
         List<Movie> founded = new ArrayList<Movie>();
         for(int i=0; i<movies.size();i++){
-            if(movies.get(i).getName().contains(name))
-                founded.add(movies.get(i));
+            Movie m =movies.get(i);
+            if(m.getName().toLowerCase().contains(name.toLowerCase()))
+                founded.add(m);
+        }
+        return founded;
+    }
+    
+    
+    /**
+     * Helper method for searchByStatus
+     * Find multiple movies by status
+     * @param name
+     * @return 
+     */
+    public List<Movie> searchByStatus(String status) {
+        FileAdapter fileAdapter = new FileAdapter();
+        List<Movie> movies = fileAdapter.loadMovies();
+        return searchByStatus(movies, status);
+    }
+    
+    
+    /**
+    * Find multiple movies by status
+    * @param movies
+    * @param name
+    * @return 
+    */ 
+    private List<Movie> searchByStatus(List<Movie> movies, String status) {
+        List<Movie> founded = new ArrayList<Movie>();
+        for(int i=0; i<movies.size();i++){
+            Movie m =movies.get(i);
+            if(m.getStatus().toLowerCase().contains(status.toLowerCase()))
+                founded.add(m);
         }
         return founded;
     }

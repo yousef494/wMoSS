@@ -22,17 +22,21 @@ import java.util.List;
  * @author Yousef
  */
 public class FileAdapter {
+
+    private String moviesFilePath ="resources/movies.json";
     
-    private String moviesFilePath ="";
+    public FileAdapter(){
+
+    }
     
     /**
      * reads and convert string from movies file to list of movies objects
      * @return 
      */
     public List<Movie> loadMovies(){
-        Gson json = new Gson();
+        Gson gson = new Gson();
         String fileContent = read(moviesFilePath);
-        List<Movie> movies = json.fromJson(fileContent, new TypeToken<List<Movie>>() {
+        List<Movie> movies = gson.fromJson(fileContent, new TypeToken<List<Movie>>() {
         }.getType());
         return movies;
     }
@@ -45,6 +49,8 @@ public class FileAdapter {
     public String read(String filePath) {
         String result="";
         try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            filePath = classLoader.getResource(filePath).getFile();
             FileReader reader = new FileReader(filePath);
             BufferedReader bufferedReader = new BufferedReader(reader);
 
@@ -88,6 +94,20 @@ public class FileAdapter {
         }
     }
     
-    
+   /* public static void main(String[] args){
+        String moviesFilePath ="resources/movies.json";
+        FileAdapter file = new FileAdapter();
+        List<Movie> movies = file.loadMovies();
+        
+        for(Movie m: movies){
+            System.out.println(m.getName());
+        }
+        
+        for(int i=0;i<movies.size();i++){
+            Movie m =movies.get(i);
+            System.out.println(m);
+        }
+        
+    }*/
   
 }

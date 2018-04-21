@@ -5,6 +5,7 @@
  */
 package controller;
 
+import bl.Movie;
 import bl.Search;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -40,21 +41,32 @@ public class CRUD extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(false);
         
-        Gson gson = new Gson();
+        Gson gson = new Gson();//JSON
         Message message = new Message("Error", "CTR001");
         try {
             String postType = request.getParameter("postType");
 
             //represent single user story/function e.g.search
             if (postType.contentEquals("search")) {
-                String query = request.getParameter("query");
-                Search search = new Search();
-                //List<Object> records = search.search(query);
-                message.setResult("OK");
-                message.setMessage("We got your query: "+ query);
-                //message.setRecords(records);
-                message.setRecordsTotal(0);
+                String query = request.getParameter("query");//get query form the user
+                Search search = new Search();//process the request
+                List<Movie> records = search.search(query);
+                
+                message.setResult("OK");//prepare for a response 
+                message.setRecords(records);
+                message.setRecordsTotal(records.size());
+                
+            }else if (postType.contentEquals("navigate")) {
+                String query = request.getParameter("query");//get query form the user
+                Search search = new Search();//process the request
+                List<Movie> records = search.searchByStatus(query);
+                
+                message.setResult("OK");//prepare for a response 
+                message.setRecords(records);
+                message.setRecordsTotal(records.size());
+                
             }
+            
 
             //send back message
             out.println(gson.toJson(message));

@@ -19,6 +19,7 @@ public class Movie {
     private String status;
     private String price;
     private List<String> sessions;
+    private String image;
 
     public String getName() {
         return name;
@@ -83,6 +84,11 @@ public class Movie {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" + "name=" + name + ", summary=" + summary + ", status=" + status + ", price=" + price + ", sessions=" + sessions + '}';
     }
     
     

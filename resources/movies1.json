@@ -1,0 +1,145 @@
+[
+  {
+    "name": "Rampage",
+    "summary": "Rampage directed by Brad Peyton, is a 2018 science fiction movie loosly based on the 1986 game called Rampage, starring Dwayene Johnson",
+    "sessions": [
+      "09:00am",
+      "12:45pm",
+      "03:00pm"
+    ],
+    "price": "$15",
+    "image": "rampage.jpg",
+    "release": "12/04/2018",
+    "status": "Current"
+  },
+  {
+    "name": "Peter Rabbit",
+    "summary": "Peter Rabbit directed by Will Gluck, is live-action comedy film based on the famous book stories of Peter Rabbit. Starring Domhnall Gleeson as Thomas McGrego, Rose Brne as Bea and Sam Neill as Mr. Joe McGregor",
+    "sessions": [
+      "10:00am",
+      "01:45pm",
+      "04:00pm"
+    ],
+    "price": "Price",
+    "image": "peterrabit.jpg",
+    "release": "03/02/2018",
+    "status": "Current"
+  },
+  {
+    "name": "Avengers: Infinity War",
+    "summary": "Directed by ANthony Russo and Joe Russo, Avenger: Infinity War is an superhero action film based on the Marvel Comincs super hero team the Avengers. It is amoung the most anticipated of 2018, starring Robert Downy Jr. as Iron Man, Chris Hemswoth as Thor, Mark Ruffalo as HULK and Scarlett Johanson as Black Widow",
+    "sessions": [
+      "09:00am",
+      "02:45pm",
+      "05:00pm"
+    ],
+    "price": "Price",
+    "image": "avengers.jpg",
+    "release": "25/04/2018",
+    "status": "Coming Soon"
+  },
+  {
+    "name": "Black Panther",
+    "summary": "Directed by Ryan Coogler, Black Panther is a superhero action fild based on the Marvel Comics super hero named Black Panther. The Plot revolves around the protagonist T'challa and flows as he returns to Wakanda as a king after the passing of his father in an accident occured in the movie Captain America: Civil War, now as King T'challa will be facing new challanges and responsilities. Starring Chadwick Boseman as King T'Challa and Michael B. Jordana as the antagonist.",
+    "sessions": [
+      "11:00am",
+      "03:45pm",
+      "06:00pm"
+    ],
+    "price": "Price",
+    "image": "blackpanther.jpg",
+    "release": "29/01/2018",
+    "status": "Current"
+  },
+  {
+    "name": "A Quiet Place",
+    "summary": "Directed by John Krasinski, A Quiet Place is horror film with the plot which follows a story of an family that must live in silence because of the arrival of extraterrestrial creatures on earth who hunt exclusively by sound and if the family makes any sound their lives will be at risk. Starring the director of the film John Krasinski with his wife EMily Blunt.",
+    "sessions": [
+      "09:45am",
+      "11:45pm",
+      "02:30pm"
+    ],
+    "price": "Price",
+    "image": "aquietplace.jpg",
+    "release": "03/04/2018",
+    "status": "Current"
+  },
+  {
+    "name": "Ready Player One",
+    "summary": "Directed by Steven Spielberg, Ready Player One, is 2018 sience fictiona action adventure film based on Ernest Cline's novel Ready Player One. The story is set in the year 2045 where the presence of Virtual Reality is prominant and almost all use it to escape from reality. Starring Tye Sheridan, Olivia Cooke, Ben Mendelsohn and T.J. Miller.",
+    "sessions": [
+      "09:00am",
+      "12:45pm",
+      "03:00pm"
+    ],
+    "price": "Price",
+    "image": "readyplayerone.jpg",
+    "release": "29/03/2018",
+    "status": "Current"
+  },
+  {
+    "name": "Sherlock Gnomes",
+    "summary": "Directed by John Stevenson, Sherlock Gnomes is an 2018 comedy computer animated film which serves as sequel to Gnomeo & Juliet released in 2011. The plot follows the story of Sherlock who investigates the mystery behind the missing gnomes. Starring James McAvoy, Emily Blunt, Chitwetel Ejiofor, Mary J. Blige and Johnny Depp.",
+    "sessions": [
+      "09:30am",
+      "12:30pm",
+      "02:45pm"
+    ],
+    "price": "Price",
+    "image": "sherlockgnomes.jpg",
+    "release": "29/03/2018",
+    "status": "Current"
+  },
+  {
+    "name": "Truth Or Dare",
+    "summary": "Directed by Jeff Wadlow, Truthg or Dare is 2018 horror film which follows the plot of a simple truth or dare that turns into a bloodshed if one does not tell the truth or does not perform the dare. Starring Lucy Hale Tyler Possy, Violett Beane, Hayden Szeto and Landon Liboiron.",
+    "sessions": [
+      "02:00pm",
+      "04:45pm",
+      "06:30pm"
+    ],
+    "price": "Price",
+    "image": "truthordare.jpg",
+    "release": "13/04/2018",
+    "status": "Current"
+  },
+  {
+    "name": "Incredibles 2",
+    "summary": "Directed by Brad Bird, upmcoming 3D computer animated film which serves an sequel to 2004 Incredibles and also is amoung the most anticipated films of 2018 because the it is being delivered 14 years after its predecessors release. Starring Holly Hunter, Craig T. Nelson, Sarah Vowell, Huck Milner and Samuel L. Jackson.",
+    "sessions": [
+      "12:00pm",
+      "04:00pm",
+      "06:45pm"
+    ],
+    "price": "Price",
+    "image": "incredibles2.jpg",
+    "release": "14/06/2018",
+    "status": "Coming Soon"
+  },
+  {
+    "name": "Deadpool 2",
+    "summary": "Directed by David Leitch, Deadpool 2 is an superhoero action film based on the Marvel Comics character Deadpool it serves as sequel to Deadpool. The plot Consists of deadpool trying to protect a young mutant from cable and do so he must form a team of superheros called X-force. Starring Ryan Reynolds as Deadpool, Josh Brolin, Morena Baccarin, Julian Dennison, Zazie Beetz, T.J. Miiler, Brianna Hildebrand, Jack Kesy and Stefan Kapicic.",
+    "sessions": [
+      "11:00am",
+      "02:00pm",
+      "06:45pm"
+    ],
+    "price": "Price",
+    "image": "deadpool2.jpg",
+    "release": "16/05/2018",
+    "status": "Coming Soon"
+  },
+  {
+    "name": "Rampage 2",
+    "summary": "Directed by David Leitch, Deadpool 2 is an superhoero action film based on the Marvel Comics character Deadpool it serves as sequel to Deadpool. The plot Consists of deadpool trying to protect a young mutant from cable and do so he must form a team of superheros called X-force. Starring Ryan Reynolds as Deadpool, Josh Brolin, Morena Baccarin, Julian Dennison, Zazie Beetz, T.J. Miiler, Brianna Hildebrand, Jack Kesy and Stefan Kapicic.",
+    "sessions": [
+      "11:00am",
+      "02:00pm",
+      "06:45pm"
+    ],
+    "price": "Price",
+    "image": "rampage.jpg",
+    "release": "16/05/2018",
+    "status": "Coming Soon"
+  }
+]
