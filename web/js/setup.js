@@ -19,6 +19,28 @@ $(document).ready(function () {
                     alert(error);
                 });
     });
+    
+    /**
+     * Enter button action listener
+     */
+    $('#searchValue').keypress(function(e) {
+      if(e.which == 13) {
+        var term = $('#searchValue').val();
+        var message = {"postType": 'search', "query": term};
+
+        callAjax("CRUD", message, false,
+                function (data) {
+                    if (data.result == 'OK') {
+                        mainpulatePage(data);
+                    } else if (data.result == 'ERROR') {
+
+                    }
+                },
+                function (error) {
+                    alert(error);
+                });
+      }
+    });
 
 
 });
@@ -127,9 +149,12 @@ $(document).ready(function () {
 function mainpulatePage(data) {
     $('#mainDiv').html('');
     var titleDiv = $('<div class="col-md-12 products-right"></div>').appendTo('#mainDiv');
-    $(titleDiv).append('<h5>Search Results <span>('+data.recordsTotal+')</span></h5>');
-    var container = $('<div class="single-pro"></div>').appendTo('#mainDiv');
+    $(titleDiv).append('<h5>Results <span>('+data.recordsTotal+')</span></h5>');
+    $('<div class="clearfix"></div>').appendTo('#mainDiv');
+    var container = '';
     for (var i = 0; i < data.recordsTotal; i++) {
+        if((i%4)==0)
+            container = $('<div class="single-pro col-md-12"></div>').appendTo('#mainDiv');
         createCard(container, data.records[i]);
     }
     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
