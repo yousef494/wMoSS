@@ -22,6 +22,11 @@ public class Movie {
     private String image;
     private String release;
 
+    public Movie(String name) {
+        this.name = name;
+    }
+    
+
     public String getName() {
         return name;
     }

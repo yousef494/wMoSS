@@ -5,9 +5,11 @@
  */
 package controller;
 
+import bl.Cart;
 import bl.Movie;
 import bl.Search;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,7 +24,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author Yousef
  */
-
 @WebServlet(name = "CRUD", urlPatterns = {"/CRUD"})
 public class CRUD extends HttpServlet {
 
@@ -40,7 +41,7 @@ public class CRUD extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(false);
-        
+
         Gson gson = new Gson();//JSON
         Message message = new Message("Error", "CTR001");
         try {
@@ -51,22 +52,58 @@ public class CRUD extends HttpServlet {
                 String query = request.getParameter("query");//get query form the user
                 Search search = new Search();//process the request
                 List<Movie> records = search.search(query);
-                
+
                 message.setResult("OK");//prepare for a response 
                 message.setRecords(records);
                 message.setRecordsTotal(records.size());
-                
-            }else if (postType.contentEquals("navigate")) {
+
+            } else if (postType.contentEquals("navigate")) {
                 String query = request.getParameter("query");//get query form the user
                 Search search = new Search();//process the request
                 List<Movie> records = search.searchByStatus(query);
-                
+
                 message.setResult("OK");//prepare for a response 
                 message.setRecords(records);
                 message.setRecordsTotal(records.size());
+
+            } else if (postType.contentEquals("add")) {
+                String movieStr = request.getParameter("movie");//get query form the user
+                Movie movie = gson.fromJson(movieStr, new TypeToken<List<Movie>>() {
+                }.getType());
                 
+                Cart cart = (Cart)session.getAttribute("cart");
+                if(cart == null){
+                    cart = new Cart();
+                }
+                cart.addItem(movie,1);
+                session.setAttribute("cart", cart);
+
+                message.setResult("OK");//prepare for a response 
+                message.setRecord(movie);
+                message.setRecordsTotal(1);
+
+            }else if (postType.contentEquals("update")) {
+                String movieName = request.getParameter("movieName");//get query form the user
+                String quantity = request.getParameter("quantity");//get query form the user
+
+                Cart cart = (Cart)session.getAttribute("cart");
+                cart.updateQuantity(movieName,Integer.parseInt(quantity));
+                session.setAttribute("cart", cart);
+
+                message.setResult("OK");//prepare for a response 
+                message.setRecord(movieName);
+                message.setRecordsTotal(1);
+            }else if (postType.contentEquals("delete")) {
+                String movieName = request.getParameter("movieName");//get query form the user
+
+                Cart cart = (Cart)session.getAttribute("cart");
+                cart.deleteItem(movieName);
+                session.setAttribute("cart", cart);
+
+                message.setResult("OK");//prepare for a response 
+                message.setRecord(movieName);
+                message.setRecordsTotal(1);
             }
-            
 
             //send back message
             out.println(gson.toJson(message));
@@ -76,7 +113,6 @@ public class CRUD extends HttpServlet {
             out.close();
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
