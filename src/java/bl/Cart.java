@@ -84,4 +84,11 @@ public class Cart {
         quants.set(index, quantity);  
     }
 
+    @Override
+    public String toString() {
+        return "Cart{" + "items=" + items + ", quants=" + quants + ", subTotal=" + subTotal + ", total=" + total + '}';
+    }
+    
+    
+
 }

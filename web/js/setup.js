@@ -1,5 +1,11 @@
 
 $(document).ready(function () {
+    
+     /**
+      * Action listner for add to cart btn
+      */
+  
+    
      /**
       * Action listner for search btn
       */
@@ -116,7 +122,7 @@ $(window).load(function () {
 });//]]>  
 
 
-jQuery(document).ready(function ($) {
+$(document).ready(function ($) {
     $(".scroll").click(function (event) {
         event.preventDefault();
         $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
@@ -125,10 +131,7 @@ jQuery(document).ready(function ($) {
 
 
 $(document).ready(function () {
-
-
     $().UItoTop({easingType: 'easeOutQuart'});
-
 });
 
 
@@ -190,18 +193,32 @@ function createCard(container, record){
     }
     $(product).append(sessions.substring(0,sessions.length-2));
     var details = $('<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"></div>').appendTo(product);
-    var form = $(' <form action="#" method="post"></form>').appendTo(details);
-    var fieldset = $(' <fieldset></fieldset>').appendTo(form);
-    $(fieldset).append('<input type="hidden" name="cmd" value="_cart"/>');
-    $(fieldset).append('<input type="hidden" name="add" value="1"/>');
-    $(fieldset).append('<input type="hidden" name="business" value=" "/>');
-    $(fieldset).append('<input type="hidden" name="item_name" value=""/>');
-    $(fieldset).append('<input type="hidden" name="amount" value="'+record.price+'"/>');
-    $(fieldset).append('<input type="hidden" name="discount_amount" value="1.00"/>');
-    $(fieldset).append('<input type="hidden" name="currency_code" value="USD"/>');
-    $(fieldset).append('<input type="hidden" name="return" value=" "/>');
-    $(fieldset).append('<input type="hidden" name="cancel_return" value=" "/>');
-    $(fieldset).append('<input type="submit" name="submit" value="Add to cart" class="button"/>');
+    var btn = $('<input type="button" name="submit" value="Add to cart" class="button" id="addBtn" movieAttr="'+record.name+","+record.price+","+record.image+'"/>').appendTo(details);
+    btn.click(function () {
+        var movieInfo = btn.attr('movieAttr');
+        addCart(movieInfo);
+    });
 }
 
 //End of search functions
+
+
+function addCart(movieInfo){
+        var movieInfoList = movieInfo.split(",");
+        var movieJson = {"name":movieInfoList[0],"price":movieInfoList[1], "image": movieInfoList[2]};
+        //alert(movieInfoList[0]);
+        var message = {"postType": 'add', "movie": JSON.stringify(movieJson)};
+
+        callAjax("CRUD", message, false,
+                function (data) {
+                    if (data.result == 'OK') {
+                        alert("Item("+data.record.name+") was added to your cart successfully");
+                       // mainpulatePage(data);
+                    } else if (data.result == 'ERROR') {
+
+                    }
+                },
+                function (error) {
+                    alert(error);
+                });
+}

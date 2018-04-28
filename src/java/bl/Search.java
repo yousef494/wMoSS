@@ -112,6 +112,7 @@ public class Search {
         return founded;
     }
 
+    
     public boolean isWithinXDaysInAdvance(int numberOfDays, Date release) {
         Date today = new Date();
         if(today.after(release))

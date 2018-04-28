@@ -66,9 +66,20 @@ public class CRUD extends HttpServlet {
                 message.setRecords(records);
                 message.setRecordsTotal(records.size());
 
-            } else if (postType.contentEquals("add")) {
+            } else if (postType.contentEquals("view")) {
+                Cart cart = (Cart)session.getAttribute("cart");
+                if(cart == null){
+                    cart = new Cart();
+                }
+
+                message.setResult("OK");//prepare for a response 
+                message.setRecord(cart.getQuants());
+                message.setRecords(cart.getItems());
+                message.setRecordsTotal(cart.getItems().size());
+
+            }else if (postType.contentEquals("add")) {
                 String movieStr = request.getParameter("movie");//get query form the user
-                Movie movie = gson.fromJson(movieStr, new TypeToken<List<Movie>>() {
+                Movie movie = gson.fromJson(movieStr, new TypeToken<Movie>() {
                 }.getType());
                 
                 Cart cart = (Cart)session.getAttribute("cart");

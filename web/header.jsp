@@ -65,12 +65,9 @@
 		</div>
 		<div class="top_nav_right">
 			<div class="wthreecartaits wthreecartaits2 cart cart box_1"> 
-						<form action="#" method="post" class="last"> 
 						<input type="hidden" name="cmd" value="_cart">
 						<input type="hidden" name="display" value="1">
-						<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-					</form>  
-  
+						<button class="w3view-cart" type="submit" onclick="location.href = 'cart.jsp';" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>  
 						</div>
 		</div>
 		<div class="clearfix"></div>
