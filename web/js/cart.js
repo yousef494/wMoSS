@@ -58,13 +58,13 @@ function createTable(container, records, quantities) {
         var sTotal = (parseInt(record.price) * quantitiy);
         var tr = $('<tr></tr>').appendTo(tbody);
         var btnTd = $('<td></td>').appendTo(tr);
-        var removeBtn = $('<a href="" id="removeBtn" movieName="' + record.name + '"></a>').appendTo(btnTd);
+        var removeBtn = $('<a href="#" id="removeBtn" movieName="' + record.name + '"></a>').appendTo(btnTd);
         $(removeBtn).append('<span class="label label-danger fa fa-remove">Remove</span>');
         $(tr).append('<td><img src="images/movies/' + record.image + '" class="movieImageCart"/></td>\n\
 <td>' + record.name + '</td><td>' + record.price + '$</td><td>' + quantitiy + '</td><td>' + sTotal + '$</td>');
         removeBtn.click(function () {
             var movieName = $(this).attr('movieName');
-            removFromCart(movieName);
+            confirmDeletion(movieName);
         });
         total =  total + sTotal;
     }
@@ -81,14 +81,24 @@ function createSubtotals(container, total) {
 }
 
 
+function confirmDeletion(movieName) {
+    var modal = createModal("dConfirm", "Please confirm...", "Confirm", "Are you sure you want to delete "+movieName+" from your cart?");
+    modal.modal('show');
+    modal.find('#submitBtn').on('click', function (e) {
+        removFromCart(movieName);
+        modal.modal('hide');
+        window.location.href="";
+    });
+}
+
+
 function removFromCart(movieName) {
     var message = {"postType": 'delete', "movieName": movieName};
 
     callAjax("CRUD", message, false,
             function (data) {
                 if (data.result == 'OK') {
-                    alert("Item(" + data.record.name + ") was added to your cart successfully");
-                    // mainpulatePage(data);
+                    
                 } else if (data.result == 'ERROR') {
 
                 }

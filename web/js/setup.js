@@ -212,8 +212,9 @@ function addCart(movieInfo){
         callAjax("CRUD", message, false,
                 function (data) {
                     if (data.result == 'OK') {
-                        alert("Item("+data.record.name+") was added to your cart successfully");
-                       // mainpulatePage(data);
+                        var modal = createModal("addMessage", "Item was added", "", "Item "+data.record.name+" was added to your cart successfully");
+                        modal.modal('show');
+                        // mainpulatePage(data);
                     } else if (data.result == 'ERROR') {
 
                     }
@@ -221,4 +222,37 @@ function addCart(movieInfo){
                 function (error) {
                     alert(error);
                 });
+}
+
+/**
+ *  Adapted form Yousef's work AlSuwaidan ,Y 2017
+ * @param {type} id
+ * @param {type} title
+ * @param {type} content
+ * @returns {$}
+ */
+function createModal(id, title, actionType, content) {
+    $("#router-" + id + "-modal").remove();
+    // add modal
+    $('body')
+            .append(
+                    '\
+                    <div class="modal fade" id="router-' + id + '-modal" tabindex="-1" role="dialog">\
+                    <div class="modal-dialog">\
+                    <div class="modal-content">\
+                    <div class="modal-header">\
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+                    <h4 class="modal-title">' + title + '</h4>\
+                    </div>\
+                    <div class="modal-body">\
+                    <p>' + content + '</p>\
+                    </div>\
+                    <div class="modal-footer">\
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+(actionType.length>0?
+                    '<button type="submit"  data-content="remove" class="btn btn-primary" id="submitBtn">' + actionType + '</button>':'')+
+                    '</div>\
+                    </div>\
+                    </div>\
+                    </div>');
+    return $("#router-" + id + "-modal");
 }
