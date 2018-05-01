@@ -31,7 +31,7 @@ function manipulate(data) {
     $('<div class="clearfix"></div>').appendTo('#mainDiv');
     var tableContainer = $('<div class="single-pro col-md-12"></div>').appendTo('#mainDiv');
     var total = createTable(tableContainer, data.records, data.record);
-    var totalsContainer = $('<div class="single-pro col-md-4 cartSubTotal"></div>').appendTo('#mainDiv');
+    var totalsContainer = $('<div class="col-md-4 cartSubTotal"></div>').appendTo('#mainDiv');
     createSubtotals(totalsContainer, total);
     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
 }
@@ -44,7 +44,7 @@ function createTable(container, records, quantities) {
     var table = $('<table class="table table-hover table-bordered"></table>').appendTo(container);
     var thead = $('<thead class="bcell"></thead>').appendTo(table);
     var tr = $('<tr></tr>').appendTo(thead);
-    $(tr).append('<th></th><th></th><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th>');
+    $(tr).append('<th></th><th></th><th>Movie (Session)</th><th>Price</th><th>Quantity</th><th>Total</th>');
 
     var tbody = $('<tbody></tbody').appendTo(table);
     if (records.length == 0) {
@@ -78,6 +78,12 @@ function createSubtotals(container, total) {
     var tbody = $('<tbody></tbody').appendTo(table);
     var tr1 = $('<tr><td class="bcell">Subtotal</td><td>'+total+'$</td></tr>').appendTo(tbody);
     var tr2 = $('<tr><td class="bcell">Total</td><td>'+total+'$</td></tr>').appendTo(tbody);
+
+    var checkoutCon = $('<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"></div>').appendTo(container);
+    var checkoutBtn = $('<input type="button" name="submit" value="Proceed to checkout" class="button" id="checkoutBtn"/>').appendTo(checkoutCon);
+    checkoutBtn.click(function () {
+        alert('Not implemented yet...');
+    });
 }
 
 
@@ -98,7 +104,7 @@ function removFromCart(movieName) {
     callAjax("CRUD", message, false,
             function (data) {
                 if (data.result == 'OK') {
-                    
+                    $('#numberOfCartItems').html(data.recordsTotal);
                 } else if (data.result == 'ERROR') {
 
                 }

@@ -91,7 +91,7 @@ public class CRUD extends HttpServlet {
 
                 message.setResult("OK");//prepare for a response 
                 message.setRecord(movie);
-                message.setRecordsTotal(1);
+                message.setRecordsTotal(cart.getItems().size());
 
             }else if (postType.contentEquals("update")) {
                 String movieName = request.getParameter("movieName");//get query form the user
@@ -103,7 +103,7 @@ public class CRUD extends HttpServlet {
 
                 message.setResult("OK");//prepare for a response 
                 message.setRecord(movieName);
-                message.setRecordsTotal(1);
+                message.setRecordsTotal(cart.getItems().size());
             }else if (postType.contentEquals("delete")) {
                 String movieName = request.getParameter("movieName");//get query form the user
 
@@ -113,7 +113,7 @@ public class CRUD extends HttpServlet {
 
                 message.setResult("OK");//prepare for a response 
                 message.setRecord(movieName);
-                message.setRecordsTotal(1);
+                message.setRecordsTotal(cart.getItems().size());
             }
 
             //send back message

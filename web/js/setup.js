@@ -2,8 +2,21 @@
 $(document).ready(function () {
     
      /**
-      * Action listner for add to cart btn
+      * Update cart icon for number of items
       */
+    var message = {"postType": 'view'};
+    callAjax("CRUD", message, false,
+            function (data) {
+                if (data.result == 'OK') {
+                    $('#numberOfCartItems').html(data.recordsTotal);
+                } else if (data.result == 'ERROR') {
+
+                }
+            },
+            function (error) {
+                alert(error);
+            });
+ 
   
     
      /**
@@ -98,6 +111,7 @@ $(function () {
     });
 });
 
+/*
 // Mini Cart
 paypal.minicart.render({
     action: '#'
@@ -105,7 +119,7 @@ paypal.minicart.render({
 
 if (~window.location.search.indexOf('reset=true')) {
     paypal.minicart.reset();
-}
+}*/
 
 $(window).load(function () {
     $("#slider-range").slider({
@@ -170,7 +184,7 @@ function mainpulatePage(data) {
  * @returns {undefined}
  */
 function createCard(container, record){
-    var cardOuter = $('<div class="col-md-3 product-men"></div>').appendTo(container);
+    var cardOuter = $('<div class="col-md-3 product-men" id="card-'+record.name+'"></div>').appendTo(container);
     var shelf = $('<div class="men-pro-item simpleCart_shelfItem"></div>').appendTo(cardOuter);
     
     //inside shelf 1
@@ -179,23 +193,24 @@ function createCard(container, record){
     $(item).append('<img src="images/movies/'+record.image+'" alt="" class="pro-image-back" />');
     var cart = $('<div class="men-cart-pro"></div>').appendTo(item);
     var innerCart = $('<div class="inner-men-cart-pro"></div>').appendTo(cart);
-    $(innerCart).append('<a href="single.jsp" class="link-product-add-cart">Quick View</a>');
+    $(innerCart).append('<a href="movie.jsp?movieName='+record.name+'" class="link-product-add-cart">Quick View</a>');
     
     //inside shelf 2
     $(shelf).append('<span class="product-new-top">'+record.status+'</span>');
     
     //inside shelf 3
     var product = $('<div class="item-info-product "></div>').appendTo(shelf);
-    $(product).append('<h4><a href="single.jsp">'+record.name+'</a></h4>');
-    var sessions ='';
+    $(product).append('<h4><a href="movie.jsp?movieName='+record.name+'">'+record.name+'</a></h4><br/>');
+    
+    var sessions = $('<select id="s'+(record.name).split(' ').join("")+'" class="frm-field required sect"></select').appendTo(product);
     for(var i=0;i<record.sessions.length;i++){
-        sessions += '<span style="margin-left: 5px;">'+record.sessions[i]+'</span>,';
+        $('<option name="s'+record.name+'" value="'+record.sessions[i]+'">'+record.sessions[i]+'</option>').appendTo(sessions);
     }
-    $(product).append(sessions.substring(0,sessions.length-2));
+    
     var details = $('<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"></div>').appendTo(product);
     var btn = $('<input type="button" name="submit" value="Add to cart" class="button" id="addBtn" movieAttr="'+record.name+","+record.price+","+record.image+'"/>').appendTo(details);
     btn.click(function () {
-        var movieInfo = btn.attr('movieAttr');
+        var movieInfo = $(this).attr('movieAttr');
         addCart(movieInfo);
     });
 }
@@ -205,16 +220,17 @@ function createCard(container, record){
 
 function addCart(movieInfo){
         var movieInfoList = movieInfo.split(",");
-        var movieJson = {"name":movieInfoList[0],"price":movieInfoList[1], "image": movieInfoList[2]};
+        var session = $('#s'+movieInfoList[0].split(' ').join("")).val();
+        var movieJson = {"name":movieInfoList[0]+" ("+session+")","price":movieInfoList[1], "image": movieInfoList[2], "sessions:": [session]};
         //alert(movieInfoList[0]);
         var message = {"postType": 'add', "movie": JSON.stringify(movieJson)};
 
         callAjax("CRUD", message, false,
                 function (data) {
                     if (data.result == 'OK') {
+                        $('#numberOfCartItems').html(data.recordsTotal);
                         var modal = createModal("addMessage", "Item was added", "", "Item "+data.record.name+" was added to your cart successfully");
                         modal.modal('show');
-                        // mainpulatePage(data);
                     } else if (data.result == 'ERROR') {
 
                     }
@@ -255,4 +271,30 @@ function createModal(id, title, actionType, content) {
                     </div>\
                     </div>');
     return $("#router-" + id + "-modal");
+}
+
+
+
+/**
+ * This function is adapted form
+ * Virendra 2012, Get URL Parameters using jQuery, jquerybyexample,http://www.jquerybyexample.net/2012/06/get-url-parameters-using-jquery.html, viewed 21/4/2018
+ * 
+ * @param {type} sParam
+ * @returns {getURLParameter.sParameterName}
+ */
+function getURLParameter(sParam) {
+    try {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) {
+                return sParameterName[1].split('%20').join(" ");
+            }
+        }
+        return 'Current';
+    } catch (e) {
+        return 'Current';
+    }
 }

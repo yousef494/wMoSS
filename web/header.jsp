@@ -64,10 +64,9 @@
 			</nav>	
 		</div>
 		<div class="top_nav_right">
-			<div class="wthreecartaits wthreecartaits2 cart cart box_1"> 
-						<input type="hidden" name="cmd" value="_cart">
-						<input type="hidden" name="display" value="1">
-						<button class="w3view-cart" type="submit" onclick="location.href = 'cart.jsp';" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>  
+			<div class="wthreecartaits wthreecartaits2 cart cart box_1">
+                            <span id="numberOfCartItems" class="label badge badge-important">0</span>
+						<button class="w3view-cart" type="submit" onclick="location.href = 'cart.jsp';" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button> 
 						</div>
 		</div>
 		<div class="clearfix"></div>
