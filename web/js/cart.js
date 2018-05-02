@@ -61,7 +61,7 @@ function createTable(container, records, quantities) {
         var removeBtn = $('<a href="#" id="removeBtn" movieName="' + record.name + '"></a>').appendTo(btnTd);
         $(removeBtn).append('<span class="label label-danger fa fa-remove">Remove</span>');
         $(tr).append('<td><img src="images/movies/' + record.image + '" class="movieImageCart"/></td>\n\
-<td>' + record.name + '</td><td>' + record.price + '$</td><td>' + quantitiy + '</td><td>' + sTotal + '$</td>');
+<td>' + record.name + '</td><td>$' + record.price + '</td><td>' + quantitiy + '</td><td>$' + sTotal + '</td>');
         removeBtn.click(function () {
             var movieName = $(this).attr('movieName');
             confirmDeletion(movieName);
@@ -77,7 +77,7 @@ function createSubtotals(container, total) {
     var table = $('<table class="table table-hover table-bordered"></table>').appendTo(container);
     var tbody = $('<tbody></tbody').appendTo(table);
     var tr1 = $('<tr><td class="bcell">Subtotal</td><td>'+total+'$</td></tr>').appendTo(tbody);
-    var tr2 = $('<tr><td class="bcell">Total</td><td>'+total+'$</td></tr>').appendTo(tbody);
+    var tr2 = $('<tr><td class="bcell">Total</td><td>$'+total+'</td></tr>').appendTo(tbody);
 
     var checkoutCon = $('<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"></div>').appendTo(container);
     var checkoutBtn = $('<input type="button" name="submit" value="Proceed to checkout" class="button" id="checkoutBtn"/>').appendTo(checkoutCon);
