@@ -51,6 +51,10 @@ and open the template in the editor.
     background-color: black;
 }
 
+table.table tbody tr td.bcell, thead.bcell tr th{
+    color: white;
+}
+
 .cartSubTotal{
     float: right;
 }

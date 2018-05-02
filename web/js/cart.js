@@ -76,7 +76,7 @@ function createSubtotals(container, total) {
     container.append('<div class="page-header"><h3 class="bars cartTotals">Cart totals</h3></div>');
     var table = $('<table class="table table-hover table-bordered"></table>').appendTo(container);
     var tbody = $('<tbody></tbody').appendTo(table);
-    var tr1 = $('<tr><td class="bcell">Subtotal</td><td>'+total+'$</td></tr>').appendTo(tbody);
+    var tr1 = $('<tr><td class="bcell">Subtotal</td><td>$'+total+'</td></tr>').appendTo(tbody);
     var tr2 = $('<tr><td class="bcell">Total</td><td>$'+total+'</td></tr>').appendTo(tbody);
 
     var checkoutCon = $('<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"></div>').appendTo(container);
