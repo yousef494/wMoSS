@@ -1,4 +1,4 @@
-
+var app = "wMoSS";
 $(document).ready(function () {
     
      /**
@@ -111,15 +111,7 @@ $(function () {
     });
 });
 
-/*
-// Mini Cart
-paypal.minicart.render({
-    action: '#'
-});
 
-if (~window.location.search.indexOf('reset=true')) {
-    paypal.minicart.reset();
-}*/
 
 $(window).load(function () {
     $("#slider-range").slider({

@@ -80,27 +80,27 @@ public class Search {
     }
 
     /**
-     * Helper method for searchByStatus Find multiple movies by status
-     *
-     * @param name
-     * @return
+     * 
+     * @param status
+     * @param numberOfResult
+     * @return 
      */
-    public List<Movie> searchByStatus(String status) {
+    public List<Movie> searchByStatus(String status, int numberOfResult) {
         FileAdapter fileAdapter = new FileAdapter();
         List<Movie> movies = fileAdapter.loadMovies();
-        return searchByStatus(movies, status);
+        return searchByStatus(movies, status, numberOfResult);
     }
 
     /**
-     * Find multiple movies by status
-     *
+     * 
      * @param movies
-     * @param name
-     * @return
+     * @param status
+     * @param numberOfResult
+     * @return 
      */
-    private List<Movie> searchByStatus(List<Movie> movies, String status) {
+    private List<Movie> searchByStatus(List<Movie> movies, String status, int numberOfResult) {
         List<Movie> founded = new ArrayList<Movie>();
-        for (int i = 0; i < movies.size(); i++) {
+        for (int i = 0; i < movies.size() && (founded.size()<numberOfResult || numberOfResult==-1); i++) {
             Movie m = movies.get(i);
             if (m.getStatus().toLowerCase().contains(status.toLowerCase())) {
                 Date release = convertStringToDate(m.getRelease());

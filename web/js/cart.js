@@ -1,7 +1,7 @@
 
 $(document).ready(function () {
-
-
+    document.title = app + "| Cart";
+    
     var message = {"postType": 'view'};
 
     callAjax("CRUD", message, false,

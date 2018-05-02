@@ -59,8 +59,13 @@ public class CRUD extends HttpServlet {
 
             } else if (postType.contentEquals("navigate")) {
                 String query = request.getParameter("query");//get query form the user
+                String numberOfResultStr = request.getParameter("numberOfResult");//get numberOfResult
+                Integer numberOfResult = -1;
+                if(numberOfResultStr != (null)){
+                    numberOfResult = Integer.parseInt(numberOfResultStr);
+                }
                 Search search = new Search();//process the request
-                List<Movie> records = search.searchByStatus(query);
+                List<Movie> records = search.searchByStatus(query, numberOfResult);
 
                 message.setResult("OK");//prepare for a response 
                 message.setRecords(records);

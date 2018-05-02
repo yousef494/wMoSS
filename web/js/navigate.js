@@ -1,8 +1,10 @@
 
 $(document).ready(function () {
-
-    var staus = getURLParameter('status');
-    var message = {"postType": 'navigate', "query": staus};
+    
+    var status = getURLParameter('status');
+    document.title = app + "| " + status;
+    
+    var message = {"postType": 'navigate', "query": status};
 
     callAjax("CRUD", message, false,
             function (data) {

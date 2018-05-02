@@ -2,6 +2,8 @@
 $(document).ready(function () {
 
     var movieName = getURLParameter('movieName');
+    document.title = app + "| " + movieName;
+    
     var message = {"postType": 'search', "query": movieName};
 
     callAjax("CRUD", message, false,

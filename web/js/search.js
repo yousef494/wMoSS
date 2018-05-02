@@ -1,6 +1,7 @@
 
 $(document).ready(function () {
-
+    document.title = app + "| Search";
+    
     $('#searchBtn').click(function () {
 
         var term = $('#searchValue').val();
