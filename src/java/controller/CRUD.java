@@ -84,6 +84,7 @@ public class CRUD extends HttpServlet {
 
             }else if (postType.contentEquals("add")) {
                 String movieStr = request.getParameter("movie");//get query form the user
+                String quantity = request.getParameter("quantity");
                 Movie movie = gson.fromJson(movieStr, new TypeToken<Movie>() {
                 }.getType());
                 
@@ -91,7 +92,7 @@ public class CRUD extends HttpServlet {
                 if(cart == null){
                     cart = new Cart();
                 }
-                cart.addItem(movie,1);
+                cart.addItem(movie,Integer.parseInt(quantity));
                 session.setAttribute("cart", cart);
 
                 message.setResult("OK");//prepare for a response 
