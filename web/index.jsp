@@ -3,10 +3,17 @@
 
 <!-- //header-bot -->
         <!-- banner -->
-        <div id="mainDive">
+        <div id="bannerDive">
             
         </div>
-
+<div class="banner-bootom-w3-agileits">
+	<div class="container">
+            <div id="mainDiv">
+                <h3>Welcome!</h3>
+            </div>
+            
+        </div>
+</div>
             <!-- The Modal -->
         <!-- //banner -->
 
