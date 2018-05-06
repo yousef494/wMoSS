@@ -199,6 +199,8 @@ function createCard(container, record){
         $('<option name="s'+record.name+'" value="'+record.sessions[i]+'">'+record.sessions[i]+'</option>').appendTo(sessions);
     }
     
+    $(product).append('<input id="q'+(record.name).split(' ').join("")+'" type="number"  min="1" name="qTxt" value="1" class="form-control-plaintext qTxt" id="qTxt"/>');
+    
     var details = $('<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"></div>').appendTo(product);
     var btn = $('<input type="button" name="submit" value="Add to cart" class="button" id="addBtn" movieAttr="'+record.name+","+record.price+","+record.image+'"/>').appendTo(details);
     btn.click(function () {
@@ -213,9 +215,10 @@ function createCard(container, record){
 function addCart(movieInfo){
         var movieInfoList = movieInfo.split(",");
         var session = $('#s'+movieInfoList[0].split(' ').join("")).val();
+        var quantity = $('#q'+movieInfoList[0].split(' ').join("")).val();
         var movieJson = {"name":movieInfoList[0]+" ("+session+")","price":movieInfoList[1], "image": movieInfoList[2], "sessions:": [session]};
         //alert(movieInfoList[0]);
-        var message = {"postType": 'add', "movie": JSON.stringify(movieJson)};
+        var message = {"postType": 'add', "movie": JSON.stringify(movieJson), "quantity": quantity};
 
         callAjax("CRUD", message, false,
                 function (data) {

@@ -44,6 +44,7 @@ function createUpper(container, record){
         $('<div class="thumb-image"> <img src="images/movies/' + record.image + '" data-imagezoom="true" class="img-responsive" draggable="false"/> </div>').appendTo(li);
     }
     
+    
     var thumbsDiv = $('<ol class="flex-control-nav flex-control-thumbs"></ol>').appendTo(sliderDiv);
     var thumb1 = $('<li><img src="images/movies/' + record.image + '" class="" draggable="false"></li>').appendTo(thumbsDiv);
     var thumb2 = $('<li><img src="images/movies/' + record.image + '" class="" draggable="false"></li>').appendTo(thumbsDiv);
@@ -66,6 +67,13 @@ function createRight(container, record){
     for(var i=0;i<record.sessions.length;i++){
         $('<option name="s'+(record.name).split(' ').join("")+'" value="'+record.sessions[i]+'">'+record.sessions[i]+'</option>').appendTo(sessions);
     }
+    
+    $(container).append('<br/>');
+    var quantityCon = $('<div class="color-quality"></div>').appendTo(container);
+    var quantityDiv = $('<div class="color-quality-right"></div>').appendTo(quantityCon);
+    $('<h5>Quantity:</h5>').appendTo(quantityDiv);
+    $(quantityDiv).append('<input id="q'+(record.name).split(' ').join("")+'" type="number"  min="1" name="qTxt" value="1" class="form-control-plaintext qTxt" id="qTxt"/>');
+
     
     var occasionCon = $('<div class="occasion-cart"></div>').appendTo(container);
     var details = $('<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"></div>').appendTo(occasionCon);

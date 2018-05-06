@@ -63,3 +63,10 @@ select {
     background-color: white;
     border-color: #2fdab8;
 }
+
+.qTxt {
+    width: 20%;
+    margin-left: 10px;
+    border: 1px solid #2fdab8;
+    border-radius: 4px;
+}
