@@ -63,16 +63,16 @@ function createRight(container, record){
     var sessionsCon = $('<div class="color-quality"></div>').appendTo(container);
     var sessionsDiv = $('<div class="color-quality-right"></div>').appendTo(sessionsCon);
     $('<h5>Sessions:</h5>').appendTo(sessionsDiv);
-    var sessions = $('<select id="s'+(record.name).split(' ').join("")+'" class="frm-field required sect"></select').appendTo(sessionsDiv);
+    var sessions = $('<select id="s'+(record.name).replace(/\W+/g,"_").split(' ').join("")+'" class="frm-field required sect"></select').appendTo(sessionsDiv);
     for(var i=0;i<record.sessions.length;i++){
-        $('<option name="s'+(record.name).split(' ').join("")+'" value="'+record.sessions[i]+'">'+record.sessions[i]+'</option>').appendTo(sessions);
+        $('<option name="s'+(record.name).replace(/\W+/g,"_").split(' ').join("")+'" value="'+record.sessions[i]+'">'+record.sessions[i]+'</option>').appendTo(sessions);
     }
     
     $(container).append('<br/>');
     var quantityCon = $('<div class="color-quality"></div>').appendTo(container);
     var quantityDiv = $('<div class="color-quality-right"></div>').appendTo(quantityCon);
     $('<h5>Quantity:</h5>').appendTo(quantityDiv);
-    $(quantityDiv).append('<input id="q'+(record.name).split(' ').join("")+'" type="number"  min="1" name="qTxt" value="1" class="form-control-plaintext qTxt" id="qTxt"/>');
+    $(quantityDiv).append('<input id="q'+(record.name).replace(/\W+/g,"_").split(' ').join("")+'" type="number"  min="1" name="qTxt" value="1" class="form-control-plaintext qTxt" id="qTxt"/>');
 
     
     var occasionCon = $('<div class="occasion-cart"></div>').appendTo(container);

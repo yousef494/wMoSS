@@ -194,12 +194,12 @@ function createCard(container, record){
     var product = $('<div class="item-info-product "></div>').appendTo(shelf);
     $(product).append('<h4><a href="movie.jsp?movieName='+record.name+'">'+record.name+'</a></h4><br/>');
     
-    var sessions = $('<select id="s'+(record.name).split(' ').join("")+'" class="frm-field required sect"></select').appendTo(product);
+    var sessions = $('<select id="s'+(record.name).replace(/\W+/g,"_").split(' ').join("")+'" class="frm-field required sect"></select').appendTo(product);
     for(var i=0;i<record.sessions.length;i++){
         $('<option name="s'+record.name+'" value="'+record.sessions[i]+'">'+record.sessions[i]+'</option>').appendTo(sessions);
     }
     
-    $(product).append('<input id="q'+(record.name).split(' ').join("")+'" type="number"  min="1" name="qTxt" value="1" class="form-control-plaintext qTxt" id="qTxt"/>');
+    $(product).append('<input id="q'+(record.name).replace(/\W+/g,"_").split(' ').join("")+'" type="number"  min="1" name="qTxt" value="1" class="form-control-plaintext qTxt" id="qTxt"/>');
     
     var details = $('<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"></div>').appendTo(product);
     var btn = $('<input type="button" name="submit" value="Add to cart" class="button" id="addBtn" movieAttr="'+record.name+","+record.price+","+record.image+'"/>').appendTo(details);
@@ -214,25 +214,33 @@ function createCard(container, record){
 
 function addCart(movieInfo){
         var movieInfoList = movieInfo.split(",");
-        var session = $('#s'+movieInfoList[0].split(' ').join("")).val();
-        var quantity = $('#q'+movieInfoList[0].split(' ').join("")).val();
+        var session = $('#s'+movieInfoList[0].replace(/\W+/g,"_").split(' ').join("")).val();
+        var quantity = $('#q'+movieInfoList[0].replace(/\W+/g,"_").split(' ').join("")).val();
         var movieJson = {"name":movieInfoList[0]+" ("+session+")","price":movieInfoList[1], "image": movieInfoList[2], "sessions:": [session]};
-        //alert(movieInfoList[0]);
-        var message = {"postType": 'add', "movie": JSON.stringify(movieJson), "quantity": quantity};
+        
+        var seatingModal = createModal("selectSeates", "Please Select Seat", "Submit", "Item was added to your cart successfully");
+        seatingModal.modal('show');
+        var mapCon = $(seatingModal).find('.modal-body');
+        var submitBtn = $(seatingModal).find('#submitBtn');
+        var sc = seating(mapCon,{"max": parseInt(quantity)});
+        submitBtn.click(function () {
+            var seats = getSelectedSeats(sc);
+            var message = {"postType": 'add', "movie": JSON.stringify(movieJson), "quantity": quantity, "seats": JSON.stringify(seats)};
+            callAjax("CRUD", message, false,
+                    function (data) {
+                        if (data.result == 'OK') {
+                            $('#numberOfCartItems').html(data.recordsTotal);
+                            var modal = createModal("addMessage", "Item was added", "", "Item "+data.record.name+" was added to your cart successfully");
+                            modal.modal('show');
+                        } else if (data.result == 'ERROR') {
 
-        callAjax("CRUD", message, false,
-                function (data) {
-                    if (data.result == 'OK') {
-                        $('#numberOfCartItems').html(data.recordsTotal);
-                        var modal = createModal("addMessage", "Item was added", "", "Item "+data.record.name+" was added to your cart successfully");
-                        modal.modal('show');
-                    } else if (data.result == 'ERROR') {
-
-                    }
-                },
-                function (error) {
-                    alert(error);
-                });
+                        }
+                        seatingModal.modal('hide');
+                    },
+                    function (error) {
+                        alert(error);
+                    });
+        });
 }
 
 /**

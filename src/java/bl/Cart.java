@@ -16,12 +16,14 @@ public class Cart {
 
     private List<Movie> items;
     private List<Integer> quants;
+    private List<Seat> seats;
     private double subTotal;
     private double total;
 
     public Cart() {
         items = new ArrayList<Movie>();
         quants = new ArrayList<Integer>();
+        seats = new ArrayList<Seat>();
         subTotal = 0;
         total = 0;
     }
@@ -62,14 +64,18 @@ public class Cart {
 
     }
 
-    public void addItem(Movie movie, int quantity) {
+    public void addItem(Movie movie, int quantity, Seat selectedSeats) {
         int index = items.indexOf(movie);
         if (index == -1) {
             items.add(movie);
             quants.add(quantity);
+            seats.add(selectedSeats);
         } else {
             int oldQuantity = quants.get(index);
             quants.set(index, oldQuantity + quantity);
+            Seat oldSeats = seats.get(index);
+            oldSeats.addSeats(selectedSeats);
+            seats.set(index, oldSeats);
         }
     }
 
@@ -77,6 +83,7 @@ public class Cart {
         int index = items.indexOf(new Movie(name));
         items.remove(index);
         quants.remove(index);
+        seats.remove(index);
     }
 
     public void updateQuantity(String name, int quantity) {

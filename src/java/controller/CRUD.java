@@ -8,6 +8,7 @@ package controller;
 import bl.Cart;
 import bl.Movie;
 import bl.Search;
+import bl.Seat;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class CRUD extends HttpServlet {
                 String query = request.getParameter("query");//get query form the user
                 String numberOfResultStr = request.getParameter("numberOfResult");//get numberOfResult
                 Integer numberOfResult = -1;
-                if(numberOfResultStr != (null)){
+                if (numberOfResultStr != (null)) {
                     numberOfResult = Integer.parseInt(numberOfResultStr);
                 }
                 Search search = new Search();//process the request
@@ -72,60 +73,80 @@ public class CRUD extends HttpServlet {
                 message.setRecordsTotal(records.size());
 
             } else if (postType.contentEquals("view")) {
-                Cart cart = (Cart)session.getAttribute("cart");
-                if(cart == null){
+                Cart cart = (Cart) session.getAttribute("cart");
+                if (cart == null) {
                     cart = new Cart();
                 }
 
                 message.setResult("OK");//prepare for a response 
-                message.setRecord(cart.getQuants());
-                message.setRecords(cart.getItems());
+                //message.setRecord(cart.getQuants());
+                message.setRecord(cart);
+                //message.setRecords(cart.getItems());
                 message.setRecordsTotal(cart.getItems().size());
 
-            }else if (postType.contentEquals("add")) {
+            } else if (postType.contentEquals("add")) {
                 String movieStr = request.getParameter("movie");//get query form the user
-                String quantity = request.getParameter("quantity");
+                String quantityStr = request.getParameter("quantity");
+                String seatsStr = request.getParameter("seats");
+                int quantity = Integer.parseInt(quantityStr) > 0 ? Integer.parseInt(quantityStr) : 1;
+
                 Movie movie = gson.fromJson(movieStr, new TypeToken<Movie>() {
                 }.getType());
+
+                List<String> seatsList = gson.fromJson(seatsStr, new TypeToken<List<String>>() {
+                }.getType());
+                Seat seats = new Seat(seatsList);
                 
-                Cart cart = (Cart)session.getAttribute("cart");
-                if(cart == null){
+                Cart cart = (Cart) session.getAttribute("cart");
+                if (cart == null) {
                     cart = new Cart();
                 }
-                cart.addItem(movie,Integer.parseInt(quantity));
+                cart.addItem(movie, quantity, seats);
                 session.setAttribute("cart", cart);
 
                 message.setResult("OK");//prepare for a response 
                 message.setRecord(movie);
                 message.setRecordsTotal(cart.getItems().size());
 
-            }else if (postType.contentEquals("update")) {
+            } else if (postType.contentEquals("update")) {
                 String movieName = request.getParameter("movieName");//get query form the user
-                String quantity = request.getParameter("quantity");//get query form the user
-
-                Cart cart = (Cart)session.getAttribute("cart");
-                cart.updateQuantity(movieName,Integer.parseInt(quantity));
+                String quantityStr = request.getParameter("quantity");//get query form the user
+                int quantity = Integer.parseInt(quantityStr) > 0 ? Integer.parseInt(quantityStr) : 1;
+                Cart cart = (Cart) session.getAttribute("cart");
+                cart.updateQuantity(movieName, quantity);
                 session.setAttribute("cart", cart);
 
                 message.setResult("OK");//prepare for a response 
                 message.setRecord(movieName);
                 message.setRecordsTotal(cart.getItems().size());
-            }else if (postType.contentEquals("delete")) {
+            } else if (postType.contentEquals("delete")) {
                 String movieName = request.getParameter("movieName");//get query form the user
 
-                Cart cart = (Cart)session.getAttribute("cart");
+                Cart cart = (Cart) session.getAttribute("cart");
                 cart.deleteItem(movieName);
                 session.setAttribute("cart", cart);
 
                 message.setResult("OK");//prepare for a response 
                 message.setRecord(movieName);
                 message.setRecordsTotal(cart.getItems().size());
+            } else if (postType.contentEquals("checkout")) {
+                String name = request.getParameter("name");
+                String address = request.getParameter("address");
+                String email = request.getParameter("email");
+                String cardNumber = request.getParameter("cardNumber");
+
+                //checkout logic....
+                System.out.println(name+", "+address+", "+email+", "+cardNumber);
+
+                message.setResult("OK");//prepare for a response 
+                //message.setRecord(movieName);
+                //message.setRecordsTotal(cart.getItems().size());
             }
 
             //send back message
             out.println(gson.toJson(message));
         } catch (Exception e) {
-            System.out.println("CTR111" + e.getStackTrace() + "");
+            System.out.println("CTR111" + e.getMessage() + "");
         } finally {
             out.close();
         }

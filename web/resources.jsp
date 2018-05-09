@@ -36,6 +36,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
         <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
 
+        <!-- for seating plug-in -->
+        <link href="css/jquery.seat-charts.css" rel="stylesheet" type="text/css" media="all" />
 
 
         <!-- js -->
@@ -59,6 +61,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!-- for bootstrap working -->
         <script type="text/javascript" src="js/assets/bootstrap.js"></script>
         
+        <!-- for seating plug-in -->
+        <script type="text/javascript" src="js/assets/jquery.seat-charts.min.js"></script>
+        <script type="text/javascript" src="js/assets/seating.js"></script>
+        
+        <!-- for credit card validation plug-in -->
+        <script type="text/javascript" src="js/assets/jquery.creditCardValidator.js"></script>
         
         <script type="text/javascript" src="js/setup.js"></script>
 
