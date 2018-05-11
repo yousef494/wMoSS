@@ -5,6 +5,7 @@ function seating(container, data) {
     $(container).html('');
     var seatingdiv = $('<div class="single-pro col-md-12"></div>').appendTo(container);
     var map = $('<div class="col-md-7"></div>').appendTo(seatingdiv);
+    map.append('<div class="text-center">Screen</div><hr/>');
 
     var info = $('<div class="col-md-5"></div>').appendTo(seatingdiv);
     var legend = $('<div class="col-md-12"></div>').appendTo(info);
@@ -13,13 +14,12 @@ function seating(container, data) {
 
     var sc = $(map).seatCharts({
         map: [
-            '_eeee_eeee_',
-            'eeeee_eeeee',
-            'eeeee_eeeee',
-            'eeeee_eeeee',
-            'eeeee_eeeee',
-            'eeeee_eeeee',
-            'eeeee_eeeee',
+            'eeee__eeee',
+            'eeee__eeee',
+            'eeee__eeee',
+            'eeee__eeee',
+            'eeee__eeee',
+            'eeeeeeeeee',
         ],
         naming: {
             top: false,

@@ -50,7 +50,7 @@ function createTable(container, records, cart) {//quantities) {
         $(container).append('<div class="text-center">No added item in the cart yet</div>');
     }
 
-    
+
     for (var i = 0; i < cart.items.length; i++) {
         var record = cart.items[i];
         var quantitiy = cart.quants[i];
@@ -115,7 +115,7 @@ function removFromCart(movieName) {
 
 
 function proceedCheckout() {
-    if(g_total==0)
+    if (g_total == 0)
         return;
     var form = '<form name="altEditor-form" role="form"><div class="clearfix"></div>';
     form = form + createControl('Name', 'name', "", "required");
@@ -155,9 +155,12 @@ function proceedPayment(name, address, email) {
     paymentModal.find('#cardNumber').validateCreditCard(function (result) {
         var message = "Card Type: " + (result.card_type == null ? '-' : result.card_type.name);
         var labelAlert = (result.valid && result.length_valid && result.luhn_valid);
-        paymentModal.find('#message').html(
-                createAlert(labelAlert ? "Valid" : "Invalid", message, labelAlert ? "success" : "danger"));
+        if (result.card_type != null) {
+            paymentModal.find('#message').html(
+                    createAlert(labelAlert ? "Valid" : "Invalid", message, labelAlert ? "success" : "danger"));
+        }
     });
+
 
     //on submit
     paymentModal.find('#submitBtn').on('click', function (e) {
@@ -221,10 +224,10 @@ function submitCheckout(name, address, email, cardNumber) {
     callAjax("CRUD", message, false,
             function (data) {
                 if (data.result == 'OK') {
-                        var modal = createModal("purchaseConfirmation", "Confirmation", "", "Hi "+name+",<br/>Thank you for shopping with Cienma Aurora, please note this number ("+data.message+") for your refrence.");
-                        modal.modal('show');
-                        g_total = 0;
-                        manipulate(data);
+                    var modal = createModal("purchaseConfirmation", "Confirmation", "", "Hi " + name + ",<br/>Thank you for shopping with Cienma Aurora, please note this number (" + data.message + ") for your refrence.");
+                    modal.modal('show');
+                    g_total = 0;
+                    manipulate(data);
                 } else if (data.result == 'ERROR') {
 
                 }

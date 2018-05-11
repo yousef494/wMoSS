@@ -5,6 +5,7 @@
  */
 package bl;
 
+import data.FileAdapter;
 import java.util.List;
 import java.util.Random;
 
@@ -21,11 +22,12 @@ public class Purchase {
     private Cart order;
     private String refrenceNumber;
 
-    public Purchase(String name, String address, String email, String cardNumber) {
+    public Purchase(String name, String address, String email, String cardNumber, Cart cart) {
         this.name = name;
         this.address = address;
         this.email = email;
         this.cardNumber = cardNumber;
+        this.order = cart;
     }
 
     public String getName() {
@@ -78,9 +80,13 @@ public class Purchase {
 
     public String generateRefrenceNumber() {
         Random random = new Random();
-        return ""+Integer.toString(Math.abs(random.nextInt()));
+        this.refrenceNumber = ""+Integer.toString(Math.abs(random.nextInt()));
+        return this.getRefrenceNumber();
     }
-
     
+    public void storeObject(){
+        FileAdapter fileAdapter = new FileAdapter();
+        fileAdapter.addPurchase(this);
+    }
     
 }

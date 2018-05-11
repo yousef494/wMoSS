@@ -137,8 +137,10 @@ public class CRUD extends HttpServlet {
                 String cardNumber = request.getParameter("cardNumber");
                
                 //checkout logic....
-                Purchase purchase = new Purchase(name, address,email,cardNumber);
+                Cart cart = (Cart) session.getAttribute("cart");
+                Purchase purchase = new Purchase(name, address,email,cardNumber, cart);
                 String refrenceNumber = purchase.generateRefrenceNumber();
+                purchase.storeObject();
                 //flush the cart..
                 session.setAttribute("cart", new Cart());
                 
@@ -151,6 +153,7 @@ public class CRUD extends HttpServlet {
             //send back message
             out.println(gson.toJson(message));
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("CTR111" + e.getMessage() + "");
         } finally {
             out.close();

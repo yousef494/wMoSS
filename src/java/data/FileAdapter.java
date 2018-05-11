@@ -6,6 +6,7 @@
 package data;
 
 import bl.Movie;
+import bl.Purchase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
@@ -24,6 +25,7 @@ import java.util.List;
 public class FileAdapter {
 
     private String moviesFilePath ="resources/movies.json";
+    private String purchaseFilePath = "resources/purchases.json";
     
     public FileAdapter(){
 
@@ -92,6 +94,16 @@ public class FileAdapter {
             //e.printStackTrace();
             return false;
         }
+    }
+    
+    public void addPurchase(Purchase purchase){
+        Gson gson = new Gson();
+        String fileContent = read(purchaseFilePath);
+        List<Purchase> purchases = gson.fromJson(fileContent, new TypeToken<List<Purchase>>() {
+        }.getType());
+        purchases.add(purchase);
+        String purchasesStr = gson.toJson(purchases);
+        write(purchaseFilePath, purchasesStr);
     }
     
    /* public static void main(String[] args){
