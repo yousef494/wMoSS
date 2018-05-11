@@ -7,6 +7,7 @@ package controller;
 
 import bl.Cart;
 import bl.Movie;
+import bl.Purchase;
 import bl.Search;
 import bl.Seat;
 import com.google.gson.Gson;
@@ -134,13 +135,17 @@ public class CRUD extends HttpServlet {
                 String address = request.getParameter("address");
                 String email = request.getParameter("email");
                 String cardNumber = request.getParameter("cardNumber");
-
+               
                 //checkout logic....
-                System.out.println(name+", "+address+", "+email+", "+cardNumber);
-
+                Purchase purchase = new Purchase(name, address,email,cardNumber);
+                String refrenceNumber = purchase.generateRefrenceNumber();
+                //flush the cart..
+                session.setAttribute("cart", new Cart());
+                
                 message.setResult("OK");//prepare for a response 
-                //message.setRecord(movieName);
-                //message.setRecordsTotal(cart.getItems().size());
+                message.setMessage(refrenceNumber);
+                message.setRecord(new Cart());
+                message.setRecordsTotal(0);
             }
 
             //send back message

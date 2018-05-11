@@ -9,9 +9,18 @@
 <div class="banner-bootom-w3-agileits">
 	<div class="container">
             <div id="mainDiv">
-                <h3>Welcome!</h3>
+			<div class="agile_ab_w3ls_info">
+				<div class="col-md-6 ab_pic_w3ls">
+				   	<img src="images/ab_pic.png" alt=" " class="img-responsive" />
+				</div>
+				 <div class="col-md-6 ab_pic_w3ls_text_info">
+				    <h5>Location <span> Cinema Aurora</span> </h5>
+					<p>CA is located at Lygon Street in Melbourne CBD. In the complex there are 5 cinema theatres. Each theatre has 50 seats. Each theatre runs four shows every day. </p>
+				</div>
+				  <div class="clearfix"></div>
+			</div>    
             </div>
-            
+
         </div>
 </div>
             <!-- The Modal -->

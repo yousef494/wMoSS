@@ -38,7 +38,7 @@ function manipulate(data) {
 
 
 
-
+var g_total = 0;
 function createTable(container, records, cart) {//quantities) {
     var table = $('<table class="table table-hover table-bordered"></table>').appendTo(container);
     var thead = $('<thead class="bcell"></thead>').appendTo(table);
@@ -50,7 +50,7 @@ function createTable(container, records, cart) {//quantities) {
         $(container).append('<div class="text-center">No added item in the cart yet</div>');
     }
 
-    var total = 0;
+    
     for (var i = 0; i < cart.items.length; i++) {
         var record = cart.items[i];
         var quantitiy = cart.quants[i];
@@ -65,9 +65,9 @@ function createTable(container, records, cart) {//quantities) {
             var movieName = $(this).attr('movieName');
             confirmDeletion(movieName);
         });
-        total = total + sTotal;
+        g_total = g_total + sTotal;
     }
-    return total;
+    return g_total;
 
 }
 
@@ -115,6 +115,8 @@ function removFromCart(movieName) {
 
 
 function proceedCheckout() {
+    if(g_total==0)
+        return;
     var form = '<form name="altEditor-form" role="form"><div class="clearfix"></div>';
     form = form + createControl('Name', 'name', "", "required");
     form = form + createControl('Address', 'address', "", "required");
@@ -134,14 +136,14 @@ function proceedCheckout() {
             infoModal.modal("dispose");
         } else {
             infoModal.find('.modal-body').find('#message').html(
-                    createAlert("Invlaid", "Missing information", "danger"));
+                    createAlert("Invalid", "Missing information", "danger"));
         }
     });
 }
 
 function proceedPayment(name, address, email) {
     var form = '<form name="w3_w3layouts" role="form"><div class="clearfix"></div>';
-    form = form + createControl('Car Number', 'cardNumber', "", "required");
+    form = form + createControl('Card Number', 'cardNumber', "", "required");
     form = form + createControl('Expire Date', 'date', "", "required");
     form = form + createControl('Verification Code', 'vCode', "", "required");
     form = form + '</form>';
@@ -154,7 +156,7 @@ function proceedPayment(name, address, email) {
         var message = "Card Type: " + (result.card_type == null ? '-' : result.card_type.name);
         var labelAlert = (result.valid && result.length_valid && result.luhn_valid);
         paymentModal.find('#message').html(
-                createAlert(labelAlert ? "Valid" : "Invlaid", message, labelAlert ? "success" : "danger"));
+                createAlert(labelAlert ? "Valid" : "Invalid", message, labelAlert ? "success" : "danger"));
     });
 
     //on submit
@@ -168,23 +170,26 @@ function proceedPayment(name, address, email) {
             isValid = result.valid && result.length_valid && result.luhn_valid;
         });
 
-
+        isValid = validateForm(paymentModal.find('.modal-body'));
         if (isValid) {
             var cardNumber = paymentModal.find('#cardNumber').val();
             submitCheckout(name, address, email, cardNumber);
             paymentModal.modal("hide");
             paymentModal.modal("dispose");
+        } else {
+            paymentModal.find('.modal-body').find('#message').html(
+                    createAlert("Invalid", "Missing information", "danger"));
         }
     });
 }
 
 function createControl(label, input, size, required) {
     var style = "";//size!=undefined?'style="width:'+size+'px;"':"";
-    var control = '<div class="input-group">\n\
-    <div class="col-sm-6 col-md-6 col-lg-6 text-right" style="padding-top:4px;">\n\
+    var control = '<div class="input-group col-sm-12 col-md-12 col-lg-12">\n\
+    <div class="col-sm-4 col-md-4 col-lg-4 text-right" style="padding-top:4px;">\n\
     <label>' + label + ':</label></div>\n\
-    <div class="col-sm-6 col-md-6 col-lg-6" >\n\
-    <input id="' + input + '" ' + style + ' ' + required + '/></div></div>';
+    <div class="col-sm-8 col-md-8 col-lg-8" >\n\
+    <input id="' + input + '" placeholder="' + label + '"' + style + ' ' + required + '/></div></div>';
     return control
 
 }
@@ -216,7 +221,10 @@ function submitCheckout(name, address, email, cardNumber) {
     callAjax("CRUD", message, false,
             function (data) {
                 if (data.result == 'OK') {
-                    //display confirmation...
+                        var modal = createModal("purchaseConfirmation", "Confirmation", "", "Hi "+name+",<br/>Thank you for shopping with Cienma Aurora, please note this number ("+data.message+") for your refrence.");
+                        modal.modal('show');
+                        g_total = 0;
+                        manipulate(data);
                 } else if (data.result == 'ERROR') {
 
                 }

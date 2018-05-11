@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Cart {
 
+
     private List<Movie> items;
     private List<Integer> quants;
     private List<Seat> seats;
@@ -63,6 +64,18 @@ public class Cart {
     public void addItem(String movieName) {
 
     }
+
+
+    public List<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
+    }
+
+    
+    
 
     public void addItem(Movie movie, int quantity, Seat selectedSeats) {
         int index = items.indexOf(movie);

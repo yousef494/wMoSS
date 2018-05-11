@@ -79,7 +79,7 @@ function callAjax(url, postData, async, success, error) {
             success(input);
         },
         error: function (jqXHR, error, errorThrown) {
-            alert(errorThrown);
+            //alert(errorThrown);
             //var modal = createModal('error', 'Error while communicating to server', '<div>' + errorThrown + '</div>');
             //modal.modal('show');
             error(errorThrown) || console.log(errorThrown);
@@ -199,7 +199,7 @@ function createCard(container, record){
         $('<option name="s'+record.name+'" value="'+record.sessions[i]+'">'+record.sessions[i]+'</option>').appendTo(sessions);
     }
     
-    $(product).append('<input id="q'+(record.name).replace(/\W+/g,"_").split(' ').join("")+'" type="number"  min="1" name="qTxt" value="1" class="form-control-plaintext qTxt" id="qTxt"/>');
+    $(product).append('<input id="q'+(record.name).replace(/\W+/g,"_").split(' ').join("")+'" type="number"  min="1" max="10" name="qTxt" value="1" class="form-control-plaintext qTxt" id="qTxt"/>');
     
     var details = $('<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2"></div>').appendTo(product);
     var btn = $('<input type="button" name="submit" value="Add to cart" class="button" id="addBtn" movieAttr="'+record.name+","+record.price+","+record.image+'"/>').appendTo(details);
@@ -225,12 +225,15 @@ function addCart(movieInfo){
         var sc = seating(mapCon,{"max": parseInt(quantity)});
         submitBtn.click(function () {
             var seats = getSelectedSeats(sc);
+            if(seats.length != parseInt(quantity)){
+                return;
+            }
             var message = {"postType": 'add', "movie": JSON.stringify(movieJson), "quantity": quantity, "seats": JSON.stringify(seats)};
             callAjax("CRUD", message, false,
                     function (data) {
                         if (data.result == 'OK') {
                             $('#numberOfCartItems').html(data.recordsTotal);
-                            var modal = createModal("addMessage", "Item was added", "", "Item "+data.record.name+" was added to your cart successfully");
+                            var modal = createModal("addMessage", "Item was added", "", "Items "+data.record.name+" was added to your cart successfully<br/>Number of Items: "+quantity);
                             modal.modal('show');
                         } else if (data.result == 'ERROR') {
 

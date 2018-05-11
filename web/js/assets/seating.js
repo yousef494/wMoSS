@@ -37,7 +37,7 @@ function seating(container, data) {
         },
         click: function () {
             if (this.status() == 'available') {
-                if (nOfSelectedSeats != data.max) {
+                if (nOfSelectedSeats != data.max && nOfSelectedSeats!=10) {
                     var selectedSeates = 'Seat#' + this.settings.label + ' ('+this.settings.id+')';
                     $('<div>' + selectedSeates + '</div>').attr('id', 'cart-item-' + this.settings.id).appendTo(cart);
                     nOfSelectedSeats++;
