@@ -1,6 +1,8 @@
 # wMoSS
-Cienema reservation web application.
+Cinema reservation web application.
+'''
 Part of Software Engineering Project Managment course assessment at RMIT.
+'''
 
 # Features
 - View available movies.
